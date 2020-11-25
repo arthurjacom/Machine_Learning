@@ -5,7 +5,7 @@
 Iremos criar um algoritmo preditivo para classificar quais indivíduos recebiam mais ou menos que 50 mil dolares por ano com os dados fornecidos na base de dados **Census**, criada em 1996 pela *United States Census Bureau (USCB)*, a principal agência do sistema de estatística federal dos EUA.
 
 ## Obtenção dos dados
-A base de dados está disponível para download gratuito no site *[UCI Machine Learning Repository]*(https://archive.ics.uci.edu/ml/datasets/census+income).
+A base de dados está disponível para download gratuito no site [*UCI Machine Learning Repository*](https://archive.ics.uci.edu/ml/datasets/census+income).
 
 ## Pré-processamento
 
@@ -25,19 +25,15 @@ Por último renomeamos algumas colunas apenas para facilitar a leitura dos dados
 
 Durante os testes eu queria evitar ter uma acurácia alta e um árvore gigantesca ou uma árvore pequena e uma acurácia baixa, então o objetivo era encontrar um equilibrio entre os dois, mas se eu tivesse que sacrificar um pelo outro, escolheria ter uma árvore um pouco maior por mais acurácia.
 
-### **Teste.size** e **Random.state** 
-Realizei alguns testes com *test.size* usando valores de 10% a 40% e com *random.state* de 50 a 300, alguns resultados apresentaram mudanças positivas e outros negativos, mas a melhor combinação foi a combinação inicial com *test.size* em 0.30 e o *random.state* em 100.
+1. **teste.size** e **random.state**: Realizei alguns testes com *test.size* usando valores de 10% a 40% e com *random.state* de 50 a 300, alguns resultados apresentaram mudanças positivas e outros negativos, mas a melhor combinação foi a combinação inicial com *test.size* em 0.30 e o *random.state* em 100.
 
-### **Max_depth**
-Após a realização de diversos testes com valores diferentes cheguei a conclusão que o melhor valor de profundidade vária de **6 a 8**, valores menores que 6 diminuem a acurácia enquanto valores iguais ou maiores que 10 criam uma árvore muito maior com pouco aumento na taxa de acertos. 
+2. **max_depth**: Após a realização de diversos testes com valores diferentes cheguei a conclusão que o melhor valor de profundidade vária de **6 a 8**, valores menores que 6 diminuem a acurácia enquanto valores iguais ou maiores que 10 criam uma árvore muito maior com pouco aumento na taxa de acertos. 
 * Curiosamente a profundidade 9 sempre apresentava uma queda de acurácia se assemelhando aos valores inferiores a 5 ainda que a árvore de decisões seja muito maior. 
 * A profundidade no 10 com *splitter best* foi a combinação que apresentou a maior acurácia registrada em 86.1%.
  
-### **Splitter**
-Entre as configurações de *splitter best* e *random*, o *best* apresentou uma melhora de 0.1% na acurácia em grande parte dos testes, apesar de ser uma mudança insignificativa eu escolhi manter o *splitter best*.
+3. **splitter**: Entre as configurações de *splitter best* e *random*, o *best* apresentou uma melhora de 0.1% na acurácia em grande parte dos testes, apesar de ser uma mudança insignificativa eu escolhi manter o *splitter best*.
 
-### **Min_samples_split** e **Min_samples_leaf**
-Esses dois atributos limitam o valor minimo para criação de um novo nódulo e de uma nova "folha" da árvore, eles estão diretamente ligados ao tamanho da árvore de decisões e quanto maior eles são, mais eles diminuem a acurácia, por isso é muito dificil equilibrá-los.
+4. **min_samples_split** e **min_samples_leaf**: Esses dois atributos limitam o valor minimo para criação de um novo nódulo e de uma nova "folha" da árvore, eles estão diretamente ligados ao tamanho da árvore de decisões e quanto maior eles são, mais eles diminuem a acurácia, por isso é muito dificil equilibrá-los.
 Após realizar diversos testes, qualquer valor acima de 300 deixava a acurácia abaixo de 85%, então eu reduzi o valor de 5 em 5 até que ele sempre utilizasse no minimo 1% da base de dados e ao mesmo tempo não reduzisse a acurácia para abaixo de 85%, o valor ideal foi 215 para ambos os atributos.
 
 ## Resultado
